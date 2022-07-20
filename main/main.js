@@ -35,7 +35,25 @@ const createWindow = () => {
   // win.loadFile('./main/index.html')
   win.loadURL("http://127.0.0.1:3000");
 };
-
 app.whenReady().then(() => {
+  // // 需要拦截的URL地址
+  const xxx_filter = {
+    urls: [
+      "https://api.bilibili.com/*",
+      "http://*.hdslb.com/*",
+      "https://*.hdslb.com/*",
+    ],
+  };
+  session.defaultSession.webRequest.onBeforeSendHeaders(
+    xxx_filter,
+    (details, callback) => {
+      // details.requestHeaders["Referer"] = details.url;
+      // details.requestHeaders["Referer"] = undefined;
+
+      delete details.requestHeaders["Referer"];
+      callback({ requestHeaders: details.requestHeaders });
+    }
+  );
+
   createWindow();
 });

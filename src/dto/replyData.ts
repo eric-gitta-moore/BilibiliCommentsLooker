@@ -1,9 +1,9 @@
 import type { Menber } from "./menber";
-import type { ReplayContent } from "./replayContent";
+import type { ReplyContent } from "./replyContent";
 
-export interface ReplayData {
+export interface ReplyData {
   /**
-   * replayID
+   * replyID
    */
   rpid: number;
   /**
@@ -20,7 +20,7 @@ export interface ReplayData {
   // "dialog": number,
   count: number;
   /**
-   * replay count
+   * reply count
    */
   rcount: number;
   // "state": number,
@@ -45,8 +45,8 @@ export interface ReplayData {
   /**
    * 评论内容
    */
-  content: ReplayContent;
-  replies: ReplayData[] | null;
+  content: ReplyContent;
+  replies: ReplyData[] | null;
   // "assist": number,
   /**
    * 折叠评论相关描述
