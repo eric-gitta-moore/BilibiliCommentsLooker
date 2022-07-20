@@ -1,4 +1,4 @@
 export interface OfficialVerify {
-    "type": number,
-    "desc": string
+  type: number;
+  desc: string;
 }

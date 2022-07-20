@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <RouterView />
+  <el-scrollbar always :style="{ height: '100vh' }" wrap-class="scrollbar-target-backtop">
+    <div class="app-container">
+      <RouterView />
+    </div>
+  </el-scrollbar>
+  <el-backtop target=".scrollbar-target-backtop"></el-backtop>
 </template>
 
 <style scoped lang="scss">
-* {
-  margin: 0;
-  padding: 0;
+.app-container {
+  margin: 0 10px;
 }
 </style>

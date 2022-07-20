@@ -8,7 +8,6 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // element plus 手动导入，解决ElMessage没有样式的问题
-// @ts-ignore
 import ElementPlus from "unplugin-element-plus/vite";
 
 // https://vitejs.dev/config/

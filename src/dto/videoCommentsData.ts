@@ -1,5 +1,5 @@
 import type { PageSplitData } from "./pageSplitData";
-import type { ReplayData } from "./replayData";
+import type { ReplyData } from "./replyData";
 
 /**
  * 视频评论消息
@@ -14,7 +14,7 @@ export interface VideoCommentsData {
   /**
    * 普通恢复
    */
-  replies: ReplayData[];
+  replies: ReplyData[];
   // /**
   //  * 置顶
   //  */
@@ -22,7 +22,7 @@ export interface VideoCommentsData {
   /**
    * 置顶的评论给
    */
-  top_replies: ReplayData[];
+  top_replies: ReplyData[];
   /**
    * 折叠标记
    */
