@@ -73,6 +73,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .comment-content {
-  white-space: pre-line;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 </style>
