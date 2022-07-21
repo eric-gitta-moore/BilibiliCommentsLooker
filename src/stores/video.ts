@@ -106,6 +106,7 @@ export const useVideoStore = defineStore("video", {
         return this.videoData;
       } catch (e) {
         console.log(e);
+        return false
       }
     },
     async parseVideoId(videoId: string) {
