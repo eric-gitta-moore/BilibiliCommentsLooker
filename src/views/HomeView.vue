@@ -111,7 +111,7 @@ function cellRenderer(props: CellRenderProps<VideoCommentsData>) {
   return (
     <CommentAndReplyOneData
       comment-item={props.rowData}
-      row-index={props.rowIndex}
+      row-index={props.rowIndex + 1}
     ></CommentAndReplyOneData>
   );
 }

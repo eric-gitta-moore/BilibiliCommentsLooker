@@ -33,7 +33,7 @@ const createWindow = () => {
     .catch((err) => console.log("An error occurred: ", err));
 
   // win.loadFile('./main/index.html')
-  win.loadURL("http://127.0.0.1:3000");
+  win.loadURL("http://127.0.0.1:5173");
 };
 app.whenReady().then(() => {
   // // 需要拦截的URL地址
