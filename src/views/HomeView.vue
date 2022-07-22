@@ -9,6 +9,7 @@ import { storeToRefs } from "pinia";
 import CommentAndReply from "@/components/CommentAndReplyList.vue";
 import CommentAndReplyOneData from "@/components/CommentAndReplyOneData.vue";
 
+//-------------------头部操作区域
 const videoIdInput = ref("BV1Nf4y1G7ZS");
 const videoStore = useVideoStore();
 const { loadedCommentCount, commentCount, videoData, videoId } =
@@ -31,12 +32,6 @@ async function handleSearchVideo() {
     });
     return undefined;
   }
-  // (function echo() {
-  //   setTimeout(() => {
-  //     if (videoData.value) console.log(videoData.value.replies);
-  //     else echo();
-  //   }, 1000);
-  // })();
   fetchVideoDetailSettled.value = false;
   let r = await videoStore.fetchVideoDetail(videoId.value);
   if (r !== false) fetchVideoDetailSettled.value = true;
@@ -53,6 +48,8 @@ const progressPercentage = computed(() => {
   if (per > 100) return 99;
   return per;
 });
+//-------------------头部操作区域
+
 
 //---------------------树状布局
 import { ElAutoResizer } from "element-plus";
@@ -90,24 +87,8 @@ onMounted(() => {
 const treeRefHeight = computed(() => {
   return windowRect.value.height - treeTabsContentTop.value;
 });
-// watch(
-//   treeRefHeight,
-//   (val) => {
-//     console.log(
-//       "windowRect",
-//       windowRect,
-//       treeTabsRef.value?.$el
-//         .querySelector(".el-tabs__content")
-//         .getBoundingClientRect(),
-//       `treeRefHeight`,
-//       treeRefHeight
-//     );
-//   },
-//   { immediate: true }
-// );
 
 function cellRenderer(props: CellRenderProps<VideoCommentsData>) {
-  console.log(`CellRenderProps`, props);
   return (
     <CommentAndReplyOneData
       comment-item={props.rowData}
@@ -237,10 +218,6 @@ const debugFun = function (...args: any[]) {
   overflow-y: hidden !important;
 }
 
-.tree-table :deep(.el-table-v2__header-wrapper) {
-  //display: none;
-}
-
 .el-tabs {
   flex-direction: column;
   display: flex;
@@ -251,9 +228,5 @@ const debugFun = function (...args: any[]) {
     flex-direction: column;
     display: flex;
   }
-
-  //:deep(.el-tab-pane){
-  //  height :v-bind(treeRefHeight);
-  //}
 }
 </style>
