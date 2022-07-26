@@ -74,7 +74,7 @@
     "forge": {
       "packagerConfig": {
         "appVersion": "1.0.0",
-        "name": "哔哩哔哩评论查看器",
+        "name": "BilibiliCommentsLooker",
         "appCopyright": "JamesCurtis(jamescurtis666@outlook.com)",
         "icon": "",
         "win32metadata": {
@@ -86,9 +86,6 @@
       "makers": [
         {
           "name": "@electron-forge/maker-zip"
-        },
-        {
-          "name": "@electron-forge/maker-squirrel"
         }
       ]
     }
