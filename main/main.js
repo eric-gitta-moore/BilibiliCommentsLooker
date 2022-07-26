@@ -1,8 +1,9 @@
 const { app, BrowserWindow, session, ipcMain } = require("electron");
-const {
-  default: installExtension,
-  VUEJS3_DEVTOOLS,
-} = require("electron-devtools-installer");
+const path = require('path')
+// const {
+//   default: installExtension,
+//   VUEJS3_DEVTOOLS,
+// } = require("electron-devtools-installer");
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -28,14 +29,13 @@ const createWindow = () => {
       // preload: path.join(__dirname, "preload.js"),
     },
   });
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
-  installExtension(VUEJS3_DEVTOOLS)
-    .then((name) => console.log(`Added Extension:  ${name}`))
-    .catch((err) => console.log("An error occurred: ", err));
-
-  // win.loadFile('./main/index.html')
-  win.loadURL("http://127.0.0.1:5173");
+  // installExtension(VUEJS3_DEVTOOLS)
+  //   .then((name) => console.log(`Added Extension:  ${name}`))
+  //   .catch((err) => console.log("An error occurred: ", err));
+  win.loadFile(path.join(__dirname, "../dist/index.html"));
+  // win.loadURL("http://127.0.0.1:5173");
 };
 app.whenReady().then(() => {
   // // 需要拦截的URL地址
