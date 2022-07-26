@@ -15,8 +15,8 @@ export interface ReplyData {
    *
    */
   mid: number;
-  // "root": number,
-  // "parent": number,
+  root: number;
+  parent: number;
   // "dialog": number,
   count: number;
   /**
@@ -47,6 +47,15 @@ export interface ReplyData {
    */
   content: ReplyContent;
   replies: ReplyData[] | null;
+
+  /**
+   * 适配element虚拟表格展开
+   */
+  children: ReplyData[] | null;
+  /**
+   * 适配element显示索引
+   */
+  index: number|undefined;
   // "assist": number,
   /**
    * 折叠评论相关描述

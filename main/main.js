@@ -8,6 +8,8 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    minHeight: 300,
+    minWidth: 650,
     webPreferences: {
       //当设置为 false, 它将禁用同源策略
       webSecurity: false,
