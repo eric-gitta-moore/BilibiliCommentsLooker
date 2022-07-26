@@ -5,6 +5,8 @@ const path = require('path')
 //   VUEJS3_DEVTOOLS,
 // } = require("electron-devtools-installer");
 
+if (require('electron-squirrel-startup')) return app.quit();
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,

@@ -1,7 +1,9 @@
 {
-  "name": "vue-project",
-  "version": "0.0.0",
+  "name": "bilibili-comments-looker",
+  "version": "1.0.0",
   "main": "main/main.js",
+  "authors": "JamesCurtis",
+  "description": "bilibili comments looker",
   "scripts": {
     "dev": "vite",
     "start-electron": "electron .",
@@ -37,6 +39,7 @@
     "@electron-forge/maker-deb": "^6.0.0-beta.65",
     "@electron-forge/maker-rpm": "^6.0.0-beta.65",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
+    "@electron-forge/maker-wix": "^6.0.0-beta.65",
     "@electron-forge/maker-zip": "^6.0.0-beta.65",
     "@electron-forge/template-base": "https://registry.npmmirror.com/@electron-forge/template-base/-/template-base-6.0.0-beta.65.tgz",
     "@rushstack/eslint-patch": "^1.1.0",
@@ -69,10 +72,23 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "appVersion": "1.0.0",
+        "name": "哔哩哔哩评论查看器",
+        "appCopyright": "JamesCurtis(jamescurtis666@outlook.com)",
+        "icon": "",
+        "win32metadata": {
+          "ProductName": "哔哩哔哩评论查看器 Windows",
+          "CompanyName": "JamesCurtis",
+          "FileDescription": "哔哩哔哩评论查看器 for JamesCurtis"
+        }
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-zip"
+        },
+        {
+          "name": "@electron-forge/maker-squirrel"
         }
       ]
     }
