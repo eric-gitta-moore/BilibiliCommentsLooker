@@ -18,6 +18,10 @@ export const useVideoStore = defineStore("video", {
     videoData: <VideoCommentsData | null>null,
     commentCount: <number>0,
     loadedCommentCount: <number>0,
+    //仅一级评论数量
+    onlyCommentCount: <number>0,
+    //仅二级回复数量
+    onlyReplyCount: <number>0,
   }),
   getters: {},
   actions: {
@@ -29,10 +33,13 @@ export const useVideoStore = defineStore("video", {
      * @param videoId
      */
     async fetchVideoDetail(videoId: number) {
-      this.videoData = null;
+      this.$reset();
       this.videoId = videoId;
-      this.commentCount = 0;
-      this.loadedCommentCount = 0;
+      /**
+       * 二级回复的索引，每个新comment中重置为0
+       */
+      let onlyReplyCountInLoop = 0;
+      let onlyCommentCountInLoop = 0;
 
       let result: VideoCommentsResult;
       try {
@@ -55,12 +62,23 @@ export const useVideoStore = defineStore("video", {
 
         //拉取所有评论以及二级评论
         do {
+          //加法运算不要太频繁了。会导致vue性能问题
           this.loadedCommentCount += result.data.replies.length;
+          this.onlyCommentCount += result.data.replies.length;
+
+          result.data.replies.map((value, index, array)=>{
+            value.index = onlyCommentCountInLoop;
+            onlyCommentCountInLoop++;
+            // console.log(`onlyCommentCountInLoop`,value,onlyCommentCountInLoop)
+          })
+
           /**
            * 二级评论结果
            */
           // 获取当前顶级评论的二级评论
           for (const commentItem of result.data.replies) {
+            onlyReplyCountInLoop = 0;
+
             const replyPromiseArr: Promise<ReplyData[]>[] = [];
             const currentCommentId = commentItem.rpid;
             if (commentItem.rcount === 0) continue;
@@ -81,12 +99,19 @@ export const useVideoStore = defineStore("video", {
                   });
                   //记录请求进度
                   this.loadedCommentCount += r.data.data.replies.length;
+                  this.onlyReplyCount += r.data.data.replies.length;
                   return r.data.data.replies;
                 })()
               );
             }
             const replyResult = await Promise.all(replyPromiseArr);
-            commentItem.replies = replyResult.flat();
+            let replyResultFlatArr = replyResult.flat();
+            for (const reply of replyResultFlatArr) {
+              reply.index = onlyReplyCountInLoop;
+              onlyReplyCountInLoop++;
+            }
+            commentItem.replies = replyResultFlatArr;
+            commentItem.children = commentItem.replies;
           }
 
           // console.log(`result.data.replies`, result.data.replies);
@@ -106,7 +131,7 @@ export const useVideoStore = defineStore("video", {
         return this.videoData;
       } catch (e) {
         console.log(e);
-        return false
+        return false;
       }
     },
     async parseVideoId(videoId: string) {
