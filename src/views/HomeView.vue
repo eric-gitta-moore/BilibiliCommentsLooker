@@ -119,11 +119,11 @@ function cellRenderer(clickable: boolean) {
       <div
         style={style}
         class={props.class}
-        onclick={(e: PointerEvent) => {
+        onClick={() => {
           clickable &&
             setDoublePanelRightTableRepliesData(
               unref(toRef(props.rowData, "replies"))
-            )(e);
+            );
         }}
       >
         <CommentAndReplyOneData
@@ -146,10 +146,8 @@ import type { TableV2 } from "element-plus";
 const doublePanelRightTableRepliesData = ref<ReplyData[]>([]);
 
 function setDoublePanelRightTableRepliesData(replies: ReplyData[] | null) {
-  return (e: PointerEvent) => {
     if (replies !== null) doublePanelRightTableRepliesData.value = replies;
     else doublePanelRightTableRepliesData.value = [];
-  };
 }
 
 const doublePanelLeftTable = ref<InstanceType<typeof TableV2>>();
